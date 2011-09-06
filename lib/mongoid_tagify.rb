@@ -1,0 +1,3 @@
+module MongoidTagify
+  # Your code goes here...
+end
