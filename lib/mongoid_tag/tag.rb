@@ -12,7 +12,7 @@ module Mongoid
     module ClassMethods
       def tag(*args)
         options = args.extract_options!
-        field_name = (options.empty? ? :tags : args.shift).to_sym
+        field_name = (args.blank? ? :tags : args.shift).to_sym
         array_field = "#{field_name}_array".to_sym
 
         #set default options

@@ -1,10 +1,12 @@
 require 'spec_helper'
 
+
 class Product
   include Mongoid::Document
   include Mongoid::Tag
   
   tag :tags
+  tag :shapes
 end
 
 class ProductWithCategory
@@ -49,6 +51,13 @@ describe Mongoid::Tag do
       @p1.tags_array.should == ["new", "blue"]
       @p1.tags_array = ["new     ", "     blue"]
       @p1.tags.should == "new, blue"
+    end
+    
+    it "should work with other name than tags" do
+      @p1.tags = "new, blue"
+      @p1.tags_array.should == ["new", "blue"]
+      @p1.shapes = "round, square"
+      @p1.shapes_array.should == ["round", "square"]
     end
   end
   
