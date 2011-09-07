@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
 require 'mongoid'
-require 'mongoid_tagify.rb'
+require 'mongoid_tag.rb'
 require 'database_cleaner'
 
 RSpec.configure do |config|
@@ -20,5 +20,5 @@ end
 
 Mongoid.configure do |config|
   config.skip_version_check = true
-  config.master = Mongo::Connection.new.db("mongoid_tagify_test")
+  config.master = Mongo::Connection.new.db("mongoid_tag_test")
 end
