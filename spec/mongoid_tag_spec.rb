@@ -22,7 +22,7 @@ class Category
   
   has_many :products
   
-  tag_meta_for :tags
+  tagmeta_for :tags
 end
 
 

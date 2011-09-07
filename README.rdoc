@@ -1,3 +1,34 @@
-= Mongoid Tagify
+= Mongoid Tag
 
-Write me tomorrow....
+This gem is heaviliy influenced by Aaron Qians mongoid_taggable_with_context gem. I needed a way to tag a model and let a contextual scope of that model hold meta-data about the tags.
+
+In example: when I tag a product with "nice", I wanted the products category to know how many products was tagged with "nice". I also wanted to store additional data about this tag such as color (i.e colored labels on gmail.)
+
+Since I have never written a gem befire, this is also an attempt to do so and learn from it.
+
+== Usage
+
+  class Product
+    include Mongoid::Document
+    include Mongoid::Tag
+    belongs_to :category
+    tag :tags, :meta_in => :category
+  end
+
+  class Category
+    include Mongoid::Document
+    include Mongoid::Tag::Meta
+    tag_meta_for :tags
+  end
+
+  @c = Category.create
+  @product = Product.create(:tags => "new, expensive", :category => @c)
+
+  @product.tags => ["new", "expensive"]
+
+  @category.tags_with_weight => [["new", 1], ["expensive", 1]]
+
+  @category.add_tag("on sale", {:color => "#a2a2a2"}) #add any meta you want
+
+  @category.tags_with_meta => [["new", {:count => 1}], ["expensive", {:count => 1}], ["on sale", {:count => 0, :color => "#a2a2a2"}]]
+

@@ -9,7 +9,7 @@ module Mongoid
 
       module ClassMethods
 
-        def tag_meta_for(*args)
+        def tagmeta_for(*args)
           field_name = (args.blank? ? :tags : args.shift).to_sym
 
           class_eval %(
