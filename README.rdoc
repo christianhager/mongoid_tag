@@ -6,7 +6,8 @@ In example: when I tag a product with "nice", I wanted the products category to 
 
 
 == NOTE
-  This is my first gem ever, and it is experimental at the moment.
+
+This is my first gem ever, and it is experimental at the moment. Use it at your own risk...
 
 == Usage
 
@@ -34,3 +35,9 @@ In example: when I tag a product with "nice", I wanted the products category to 
 
   @category.tags_with_meta => [["new", {:count => 1}], ["expensive", {:count => 1}], ["on sale", {:count => 0, :color => "#a2a2a2"}]]
 
+== Scopes
+  @category.products.with_all_tags(['tag1', 'tag2']) => products tagged with both
+
+  @category.products.with_any_tags(['tag1', 'tag2']) => products tagged with one or both
+
+  @category.products.without_tags(['tag1', 'tag2']) => products not with any of tags
