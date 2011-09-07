@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Christian Hager"]
   s.email       = ["christian@rondeventure.com"]
-  s.homepage    = %q{http://github.com/aq1018/mongoid_taggable_with_context}
+  s.homepage    = %q{http://github.com/christianhager/mongoid_tag}
   s.summary = %q{Mongoid tagging with scope and meta}
   s.description = %q{Mongoid tagging gem that holds meta about tags in a scoped context.}
 
