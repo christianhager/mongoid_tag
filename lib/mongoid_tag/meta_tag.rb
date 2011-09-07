@@ -1,3 +1,5 @@
+require 'mongoid'
+
 module Mongoid
   module Tag
     class MetaTag
