@@ -52,9 +52,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency(%q<reek>, ["~> 1.2.8"])
   s.add_development_dependency(%q<roodi>, ["~> 2.1.0"])
 
-  s.add_dependency(%q<mongoid>, ["~> 2.1.0"])
-  s.add_dependency(%q<bson>, ["~> 1.3.0"])
-  s.add_dependency(%q<bson_ext>, ["~> 1.3.0"])
-  s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+  s.add_dependency(%q<mongoid>)
+  s.add_dependency(%q<bson>)
+  s.add_dependency(%q<bson_ext>)
+  s.add_dependency(%q<bundler>)
 
 end
