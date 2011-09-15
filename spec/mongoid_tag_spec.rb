@@ -128,7 +128,7 @@ describe Mongoid::Tag::Meta do
     @p.update_attributes(:tags => "new, blue")
     @c.tags_with_weight.should == [["new", 1], ["blue", 1]]
     @p.destroy
-    @c.tags_with_weight.should == [["new", 0], ["blue", 0]]
+    Category.find(@c.id).tags_with_weight.should == [["new", 0], ["blue", 0]]
   end
   
   it "can get the meta for all tags" do
