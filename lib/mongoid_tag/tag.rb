@@ -6,6 +6,7 @@ module Mongoid
       class_attribute :tagify_options
       self.tagify_options = {}
       after_save :update_meta_model
+      before_destroy :store_referance_to_meta_models
       after_destroy :decrement_all_in_meta_model
     end
 
@@ -64,7 +65,7 @@ module Mongoid
 
     module InstanceMethods
 
-      attr :current_context
+      attr :current_context, :current_meta_model, :meta_model_referances
 
       def convert_string_to_array(s)
         s.split(",").map(&:strip)
@@ -87,7 +88,21 @@ module Mongoid
       end
 
       def context_meta_model
-        send(tagify_options[@current_context][:meta_in])
+        send tagify_options[@current_context][:meta_in]
+      end
+
+      #this is done only to prevent frozen hash error - dont know how to fix it
+      def store_referance_to_meta_models
+        @meta_model_referances = {}
+        tag_contexts.each do |context|
+          model = send tagify_options[context][:meta_in]
+          @meta_model_referances[context] = {:class => model.class, :id => model.id}
+        end
+      end
+
+      def get_meta_model_from_referance(context)
+        referance = @meta_model_referances[context]
+        referance[:class].find(referance[:id])
       end
 
       def context_is_changed?
@@ -113,7 +128,10 @@ module Mongoid
 
       def decrement_all_in_meta_model
         tag_contexts.each do |context|
-          context_meta_model.update_meta_tags(context, nil, tags_for_context)
+          @current_context = context
+          if context_has_meta_model?
+            get_meta_model_from_referance(context).update_meta_tags(context, nil, tags_for_context)
+          end
         end
       end
     end

@@ -66,7 +66,7 @@ module Mongoid
         def remove_meta_tags(context, tags)
           tags.each do |tag|
             old_tag = self.meta_tags.where(:name => tag, :context => context).first
-            old_tag.count -= 1 if old_tag
+            old_tag.count -= 1 if old_tag && old_tag.count > 0
           end
         end
       end
